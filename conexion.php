@@ -6,7 +6,7 @@
 	$port = "port=5432";
 	$dbname = "exampledbnube2_706n";
 	$user = "exampledbnube2_706n_user";
-	$password = "exampledbnube2_706n_user";
+	$password = "Y2sH4BZycoqYQ5qc6uurhxF7mPI7B3VL";
 
 	$db = pg_connect("$host $port $dbname $user $password");
 
