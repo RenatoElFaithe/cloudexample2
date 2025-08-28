@@ -2,28 +2,19 @@
 include("conexion.php");
 $con = conexion();
 
-// Validar que los datos vengan del formulario
 $doc  = isset($_POST["doc"])  ? trim($_POST["doc"])  : null;
 $nom  = isset($_POST["nom"])  ? trim($_POST["nom"])  : null;
 $ape  = isset($_POST["ape"])  ? trim($_POST["ape"])  : null;
-$edad = isset($_POST["edad"]) ? (int)$_POST["edad"]  : null;
+$dir  = isset($_POST["dir"])  ? trim($_POST["dir"])  : null;
+$cel  = isset($_POST["cel"])  ? trim($_POST["cel"])  : null;
 
-// Evitar insert vacío
-if ($doc && $nom && $ape && $edad) {
-    // Usar parámetros para mayor seguridad
-    $sql = "INSERT INTO persona (dni, nombre, apellido, edad) VALUES ($1, $2, $3, $4)";
-    $result = pg_query_params($con, $sql, [$doc, $nom, $ape, $edad]);
-
-    if (!$result) {
-        die("❌ Error en la consulta: " . pg_last_error($con));
-    } else {
-        echo "✅ Registro insertado correctamente";
-    }
-} else {
-    echo "⚠️ Faltan datos obligatorios.";
+if ($doc && $nom && $ape) {
+    $sql = "INSERT INTO persona (dni, nombre, apellido, direccion, celular) 
+            VALUES ($1, $2, $3, $4, $5)";
+    $result = pg_query_params($con, $sql, [$doc, $nom, $ape, $dir, $cel]);
 }
 
-// Redirigir de nuevo al index (después de 2 seg para que veas el mensaje)
-header("Refresh:2; url=index.php");
+// Redirigir siempre de nuevo, sin imprimir nada
+header("Location: index.php");
 exit;
 ?>
