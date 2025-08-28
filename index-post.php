@@ -16,10 +16,14 @@ if ($doc && $nom && $ape && $edad) {
 
     if (!$result) {
         die("❌ Error en la consulta: " . pg_last_error($con));
+    } else {
+        echo "✅ Registro insertado correctamente";
     }
+} else {
+    echo "⚠️ Faltan datos obligatorios.";
 }
 
-// Redirigir de nuevo
-header("Location: index.php");
+// Redirigir de nuevo al index (después de 2 seg para que veas el mensaje)
+header("Refresh:2; url=index.php");
 exit;
 ?>
